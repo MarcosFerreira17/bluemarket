@@ -8,5 +8,15 @@ namespace bluemarket.Controllers
         {
             return View();
         }
+
+        public IActionResult Categorias()
+        {
+            return View();
+        }
+
+        public IActionResult NovaCategoria()
+        {
+            return View();
+        }
     }
 }

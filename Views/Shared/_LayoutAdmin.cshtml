@@ -28,19 +28,25 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Painel">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" asp-action="" asp-controller="Admin">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Painel</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Produtos">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" asp-action="Categorias" asp-controller="Admin">
+            <i class="fa fa-fw fa-list"></i>
+            <span class="nav-link-text">Categorias</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Produtos">
+          <a class="nav-link" asp-action="Produtos" asp-controller="Admin">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Produtos</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Funcionários">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" asp-action="Funcionarios" asp-controller="Admin">
             <i class="fa fa-fw fa-users"></i>
             <span class="nav-link-text">Funcionários</span>
           </a>

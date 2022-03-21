@@ -87,3 +87,5 @@ C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desa
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\bluemarket.genruntimeconfig.cache
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\Index.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\Categorias.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\NovaCategoria.cshtml.g.cs
