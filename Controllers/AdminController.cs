@@ -18,5 +18,15 @@ namespace bluemarket.Controllers
         {
             return View();
         }
+
+        public IActionResult Fornecedores()
+        {
+            return View();
+        }
+
+        public IActionResult NovoFornecedor()
+        {
+            return View();
+        }
     }
 }
