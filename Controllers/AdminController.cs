@@ -1,5 +1,6 @@
 using System.Linq;
 using bluemarket.Data;
+using bluemarket.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bluemarket.Controllers
@@ -18,7 +19,7 @@ namespace bluemarket.Controllers
 
         public IActionResult Categorias()
         {
-            var categorias = database.Categorias.ToList();
+            var categorias = database.Categorias.Where(cat => cat.Status == true).ToList();
             return View(categorias);
         }
 
@@ -27,14 +28,34 @@ namespace bluemarket.Controllers
             return View();
         }
 
+        public IActionResult EditarCategoria(int id)
+        {
+            var categoria = database.Categorias.First(cat => cat.Id == id);
+            CategoriaDTO categoriaView = new CategoriaDTO();
+            categoriaView.Id = categoria.Id;
+            categoriaView.Nome = categoria.Nome;
+            return View(categoriaView);
+        }
         public IActionResult Fornecedores()
         {
-            return View();
+            var forncedores = database.Fornecedores.Where(forn => forn.Status == true).ToList();
+            return View(forncedores);
         }
 
         public IActionResult NovoFornecedor()
         {
             return View();
+        }
+
+        public IActionResult EditarFornecedor(int id)
+        {
+            var fornecedor = database.Fornecedores.First(forn => forn.Id == id);
+            FornecedorDTO fornecedorView = new FornecedorDTO();
+            fornecedorView.Id = fornecedor.Id;
+            fornecedorView.Nome = fornecedor.Nome;
+            fornecedorView.Email = fornecedor.Email;
+            fornecedorView.Telefone = fornecedor.Telefone;
+            return View(fornecedorView);
         }
 
 

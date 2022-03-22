@@ -1,0 +1,26 @@
+@model bluemarket.DTO.FornecedorDTO
+
+@{
+    Layout = "_LayoutAdmin";
+}
+<h2>Editar Fornecedor</h2>
+<form class="form-horizontal" asp-controller="Fornecedor" asp-action="Atualizar" method="POST">
+
+    <input type="hidden" asp-for="Id">
+
+    <label asp-for="Nome">Nome</label>
+    <input class="form-control" type="text" asp-for="Nome" placeholder="Nome do forncedor"><br>
+    <span asp-validation-for="Nome"></span>
+
+    <label asp-for="Email">Email</label>
+    <input class="form-control" type="email" asp-for="Email" placeholder="email@dofornecedor.exemplo"><br>
+    <span asp-validation-for="Email"></span>
+
+    <label asp-for="Nome">Telefone</label>
+    <input class="form-control" type="Telefone" asp-for="Telefone" placeholder="(xx) x xxxx-xxxx"><br>
+    <span asp-validation-for="Telefone"></span>
+
+    <button class="btn btn-success">Atualizar</button>
+
+
+</form>

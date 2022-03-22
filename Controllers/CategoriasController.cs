@@ -1,3 +1,5 @@
+using System.Net;
+using System.Linq;
 using bluemarket.Data;
 using bluemarket.DTO;
 using bluemarket.Models;
@@ -21,6 +23,7 @@ namespace bluemarket.Controllers
                 Categoria categoria = new Categoria();
                 categoria.Nome = categoriaTemporaria.Nome;
                 categoria.Status = true;
+
                 database.Categorias.Add(categoria);
                 database.SaveChanges();
                 return RedirectToAction("Categorias", "Admin");
@@ -30,5 +33,33 @@ namespace bluemarket.Controllers
                 return View("../Admin/NovaCategoria");
             }
         }
+
+        [HttpPost]
+        public IActionResult Atualizar(CategoriaDTO categoriaTemporaria)
+        {
+            if (ModelState.IsValid)
+            {
+                var categoria = database.Categorias.First(cat => cat.Id == categoriaTemporaria.Id);
+                categoria.Nome = categoriaTemporaria.Nome;
+                database.SaveChanges();
+                return RedirectToAction("Categorias", "Admin");
+            }
+            else
+            {
+                return View("../Admin/EditarCategoria");
+            }
+        }
+        [HttpPost]
+        public IActionResult Deletar(int id)
+        {
+            if (id > 0)
+            {
+                var categoria = database.Categorias.First(cat => cat.Id == id);
+                categoria.Status = false;
+                database.SaveChanges();
+            }
+            return RedirectToAction("Categorias", "Admin");
+        }
+
     }
 }

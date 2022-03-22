@@ -15669,6 +15669,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\Views\\Admin\\EditarFornecedor.cshtml",
+      "TargetPath": "Views\\Admin\\EditarFornecedor.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\Views\\Admin\\NovoProduto.cshtml",
       "TargetPath": "Views\\Admin\\NovoProduto.cshtml",
       "FileKind": "mvc"
@@ -15691,6 +15696,11 @@
     {
       "FilePath": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\Views\\Admin\\NovoFornecedor.cshtml",
       "TargetPath": "Views\\Admin\\NovoFornecedor.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\Views\\Admin\\EditarCategoria.cshtml",
+      "TargetPath": "Views\\Admin\\EditarCategoria.cshtml",
       "FileKind": "mvc"
     },
     {

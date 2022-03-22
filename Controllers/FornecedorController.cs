@@ -1,3 +1,4 @@
+using System.Linq;
 using bluemarket.Data;
 using bluemarket.DTO;
 using bluemarket.Models;
@@ -23,8 +24,10 @@ namespace bluemarket.Controllers
                 fornecedor.Email = fornecedorTemporario.Email;
                 fornecedor.Telefone = fornecedorTemporario.Telefone;
                 fornecedor.Status = true;
+
                 database.Fornecedores.Add(fornecedor);
                 database.SaveChanges();
+
                 return RedirectToAction("Fornecedores", "Admin");
             }
             else
@@ -32,5 +35,35 @@ namespace bluemarket.Controllers
                 return View("../Admin/NovoFornecedor");
             }
         }
+
+        [HttpPost]
+        public IActionResult Atualizar(FornecedorDTO fornecedorTemporario)
+        {
+            if (ModelState.IsValid)
+            {
+                var fornecedor = database.Fornecedores.First(forn => forn.Id == fornecedorTemporario.Id);
+                fornecedor.Nome = fornecedorTemporario.Nome;
+                fornecedor.Email = fornecedorTemporario.Email;
+                fornecedor.Telefone = fornecedorTemporario.Telefone;
+                database.SaveChanges();
+                return RedirectToAction("Fornecedores", "Admin");
+            }
+            else
+            {
+                return View("../Admin/EditarFornecedor");
+            }
+        }
+        [HttpPost]
+        public IActionResult Deletar(int id)
+        {
+            if (id > 0)
+            {
+                var fornecedor = database.Fornecedores.First(forn => forn.Id == id);
+                fornecedor.Status = false;
+                database.SaveChanges();
+            }
+            return RedirectToAction("Fornecedores", "Admin");
+        }
+
     }
 }

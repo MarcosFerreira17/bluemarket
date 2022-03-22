@@ -24,7 +24,14 @@
             <tr>
                 <td>@categoria.Id</td>
                 <td>@categoria.Nome</td>
-                <td><button class="btn btn-primary">Editar</button> <button class="btn btn-danger">Deletar</button></td>
+                <td><a href="/Admin/EditarCategoria/@categoria.Id" class="btn btn-primary">Editar</a>
+
+                    <form asp-action="Deletar" asp-controller="Categorias" style="display: inline;">
+                        <input type="hidden" name="id" id="id" value="@categoria.Id">
+                        <button class="btn btn-danger">Deletar</button>
+                    </form>
+
+                </td>
             </tr>
         }
     </tbody>

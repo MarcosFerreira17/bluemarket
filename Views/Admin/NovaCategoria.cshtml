@@ -1,15 +1,15 @@
 @model bluemarket.DTO.CategoriaDTO
-
 @{
     Layout = "_LayoutAdmin";
 }
 <h2>Nova Categoria</h2>
-<form class="form-horizontal" asp-action="Salvar" asp-controller="Categorias" method="POST">
+<hr>
+<form class="form-horizontal" asp-controller="Categorias" asp-action="Salvar" method="POST">
 
     <input type="hidden" asp-for="Id" value="0">
 
     <label asp-for="Nome">Nome</label>
-    <input class="form-control" type="text" asp-for="Nome" placeholder="Nome"><br>
+    <input type="text" asp-for="Nome" class="form-control" placeholder="Nome da categoria">
     <span asp-validation-for="Nome"></span>
-    <button class="btn btn-success">Cadastrar</button>
+    <br><button class="btn btn-success">Cadastrar</button>
 </form>
