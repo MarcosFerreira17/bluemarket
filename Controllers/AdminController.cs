@@ -2,6 +2,7 @@ using System.Linq;
 using bluemarket.Data;
 using bluemarket.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace bluemarket.Controllers
 {
@@ -61,7 +62,8 @@ namespace bluemarket.Controllers
 
         public IActionResult Produtos()
         {
-            return View();
+            var produtos = database.Produtos.Include(p => p.Categoria).Include(p => p.Fornecedor).Where(p => p.Status == true).ToList();
+            return View(produtos);
         }
 
         public IActionResult NovoProduto()
@@ -69,6 +71,50 @@ namespace bluemarket.Controllers
             ViewBag.Categorias = database.Categorias.ToList();
             ViewBag.Fornecedores = database.Fornecedores.ToList();
             return View();
+        }
+
+        public IActionResult EditarProduto(int id)
+        {
+            var produto = database.Produtos.Include(p => p.Categoria).Include(p => p.Fornecedor).First(prod => prod.Id == id);
+
+            ProdutoDTO produtoView = new ProdutoDTO();
+
+            produtoView.Id = produto.Id;
+            produtoView.Nome = produto.Nome;
+            produtoView.Categoria = produto.Categoria.Id;
+            produtoView.Fornecedor = produto.Fornecedor.Id;
+            produtoView.PrecoDeCusto = produto.PrecoDeCusto;
+            produtoView.PrecoDeVenda = produto.PrecoDeVenda;
+            produtoView.Medicao = produto.Medicao;
+            ViewBag.Categorias = database.Categorias.ToList();
+            ViewBag.Fornecedores = database.Fornecedores.ToList();
+
+            return View(produtoView);
+        }
+
+        public IActionResult Promocoes()
+        {
+            var promocoes = database.Promocoes.Include(p => p.Produto).Where(p => p.Status == true).ToList();
+            return View(promocoes);
+        }
+
+        public IActionResult NovaPromocao()
+        {
+            ViewBag.Produtos = database.Produtos.ToList();
+            return View();
+        }
+
+        public IActionResult EditarPromocao(int id)
+        {
+            var promocao = database.Promocoes.Include(p => p.Produto).First(forn => forn.Id == id);
+
+            PromocaoDTO promocaoView = new PromocaoDTO();
+            promocaoView.Id = promocao.Id;
+            promocaoView.Nome = promocao.Nome;
+            promocaoView.Produto = promocao.Produto.Id;
+            promocaoView.Porcentagem = promocao.Porcentagem;
+            ViewBag.Produtos = database.Produtos.ToList();
+            return View(promocaoView);
         }
     }
 }

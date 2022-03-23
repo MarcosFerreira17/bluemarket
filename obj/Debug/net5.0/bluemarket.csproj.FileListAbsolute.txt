@@ -95,3 +95,7 @@ C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desa
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\Produtos.cshtml.g.cs
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\EditarCategoria.cshtml.g.cs
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\EditarFornecedor.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\EditarProduto.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\NovaPromocao.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\Promocoes.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\EditarPromocao.cshtml.g.cs

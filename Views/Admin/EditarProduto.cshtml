@@ -1,0 +1,40 @@
+@model bluemarket.DTO.ProdutoDTO
+
+@{
+    Layout = "_LayoutAdmin";
+}
+<h2>Editar Produto</h2>
+<form class="form-horizontal" asp-action="Atualizar" asp-controller="Produtos" method="POST">
+    <input type="hidden" asp-for="Id">
+    <label asp-for="Nome">Nome</label>
+    <input class="form-control" type="text" asp-for="Nome" placeholder="Nome"><br>
+    <span asp-validation-for="Nome"></span><br>
+
+    <label asp-for="Categoria">Categoria</label>
+    <select class="form-control" asp-for="Categoria"
+        asp-items='@(new SelectList(@ViewBag.Categorias,"Id", "Nome"))'></select>
+    <span asp-validation-for="Categoria"></span><br>
+
+    <label asp-for="Fornecedor">Fornecedor</label>
+    <select class="form-control" asp-for="Fornecedor"
+        asp-items='@(new SelectList(@ViewBag.Fornecedores,"Id", "Nome"))'></select>
+    <span asp-validation-for="Fornecedor"></span><br>
+
+    <label asp-for="PrecoDeCusto">Preço de custo</label>
+    <input class="form-control" type="number" asp-for="PrecoDeCusto" step="any" placeholder="0,00"><br>
+    <span asp-validation-for="PrecoDeCusto"></span><br>
+
+    <label asp-for="PrecoDeVenda">Preço de Venda</label>
+    <input class="form-control" type="number" asp-for="PrecoDeVenda" step="any" placeholder="0,00"><br>
+    <span asp-validation-for="PrecoDeVenda"></span><br>
+
+    <label asp-for="Medicao">Medição</label>
+    <select class="form-control" asp-for="Medicao"><br>
+        <option value="0">Kilo</option>
+        <option value="1">Litro</option>
+        <option value="2">Unidade</option>
+    </select><br>
+    <span asp-validation-for="PrecoDeCusto"></span><br>
+
+    <button class="btn btn-success">Atualizar</button>
+</form>

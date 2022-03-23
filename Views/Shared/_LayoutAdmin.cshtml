@@ -24,6 +24,7 @@
   <!-- Load of JQuery-->
   <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="~/vendor/datatables/jquery.datatables.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -59,6 +60,12 @@
           <a class="nav-link" asp-action="Produtos" asp-controller="Admin">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Produtos</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Promoções">
+          <a class="nav-link" asp-action="Promocoes" asp-controller="Admin">
+            <i class="fa fa-fw fa-money"></i>
+            <span class="nav-link-text">Promoções</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Funcionários">

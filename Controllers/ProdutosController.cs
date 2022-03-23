@@ -3,6 +3,7 @@ using bluemarket.Data;
 using bluemarket.DTO;
 using bluemarket.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace bluemarket.Controllers
 {
@@ -38,6 +39,38 @@ namespace bluemarket.Controllers
                 ViewBag.Fornecedores = database.Fornecedores.ToList();
                 return View("../Admin/NovoProduto");
             }
+
+        }
+        [HttpPost]
+        public IActionResult Atualizar(ProdutoDTO produtoTemporario)
+        {
+            if (ModelState.IsValid)
+            {
+                var produto = database.Produtos.First(prod => prod.Id == produtoTemporario.Id);
+                produto.Nome = produtoTemporario.Nome;
+                produto.Categoria = database.Categorias.First(categoria => categoria.Id == produtoTemporario.Categoria);
+                produto.Fornecedor = database.Fornecedores.First(fornecedor => fornecedor.Id == produtoTemporario.Fornecedor);
+                produto.PrecoDeCusto = produtoTemporario.PrecoDeCusto;
+                produto.PrecoDeVenda = produtoTemporario.PrecoDeVenda;
+                produto.Medicao = produtoTemporario.Medicao;
+                database.SaveChanges();
+                return RedirectToAction("Produtos", "Admin");
+            }
+            else
+            {
+                return View("../Admin/EditarProduto");
+            }
+        }
+        [HttpPost]
+        public IActionResult Deletar(int id)
+        {
+            if (id > 0)
+            {
+                var produto = database.Produtos.First(prod => prod.Id == id);
+                produto.Status = false;
+                database.SaveChanges();
+            }
+            return RedirectToAction("Produtos", "Admin");
         }
     }
 }
