@@ -7,7 +7,25 @@
 <hr>
 
 <script>
-    $(document).ready(function () { $('#promocoes').DataTable(); });
+    $(document).ready(function () {
+        $('#promocoes').DataTable({
+            "info": false,
+            "language": {
+                "lengthMenu": "Mostrando _MENU_ Registros por página",
+                "zeroRecords": "Nada encontrado",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Ultimo",
+                    "next": "Proximo",
+                    "previous": "Anterior"
+                }
+            }
+        }
+        );
+    });
 </script>
 
 <table id="promocoes" class="table table-striped table-bordered">
