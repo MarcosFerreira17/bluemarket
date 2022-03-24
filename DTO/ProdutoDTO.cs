@@ -16,7 +16,11 @@ namespace bluemarket.DTO
         [Required(ErrorMessage = "O preço de custo do produto é obrigatório.")]
         public float PrecoDeCusto { get; set; }
         [Required(ErrorMessage = "O preço de venda do produto é obrigatório.")]
+        public string PrecoDeCustoString { get; set; }
+        [Required(ErrorMessage = "O preço de venda do produto é obrigatório.")]
         public float PrecoDeVenda { get; set; }
+        [Required(ErrorMessage = "O preço de venda do produto é obrigatório.")]
+        public string PrecoDeVendaString { get; set; }
         [Required(ErrorMessage = "Medição do produto é obrigatória.")]
         [Range(0, 2, ErrorMessage = "Medição inválida.")]
         public int Medicao { get; set; }

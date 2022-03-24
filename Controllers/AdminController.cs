@@ -1,8 +1,11 @@
+using System;
+using System.Net;
 using System.Linq;
 using bluemarket.Data;
 using bluemarket.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using bluemarket.Models;
 
 namespace bluemarket.Controllers
 {
@@ -83,8 +86,8 @@ namespace bluemarket.Controllers
             produtoView.Nome = produto.Nome;
             produtoView.Categoria = produto.Categoria.Id;
             produtoView.Fornecedor = produto.Fornecedor.Id;
-            produtoView.PrecoDeCusto = produto.PrecoDeCusto;
-            produtoView.PrecoDeVenda = produto.PrecoDeVenda;
+            produtoView.PrecoDeCustoString = produto.PrecoDeCusto.ToString();
+            produtoView.PrecoDeVendaString = produto.PrecoDeVenda.ToString();
             produtoView.Medicao = produto.Medicao;
             ViewBag.Categorias = database.Categorias.ToList();
             ViewBag.Fornecedores = database.Fornecedores.ToList();
@@ -115,6 +118,25 @@ namespace bluemarket.Controllers
             promocaoView.Porcentagem = promocao.Porcentagem;
             ViewBag.Produtos = database.Produtos.ToList();
             return View(promocaoView);
+        }
+
+        public IActionResult Estoques()
+        {
+            var estoque = database.Estoques.Include(p => p.Produto).ToList();
+            return View(estoque);
+        }
+        public IActionResult NovoEstoque()
+        {
+            ViewBag.Produtos = database.Produtos.ToList();
+            return View();
+        }
+
+        public IActionResult EditarEstoque(int id)
+        {
+            var estoque = database.Estoques.Include(p => p.Produto).First(e => e.Id == id);
+            ViewBag.Produtos = database.Produtos.ToList();
+
+            return View(estoque);
         }
     }
 }

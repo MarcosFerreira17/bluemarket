@@ -99,3 +99,6 @@ C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desa
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\NovaPromocao.cshtml.g.cs
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\Promocoes.cshtml.g.cs
 C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\EditarPromocao.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\Estoques.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\NovoEstoque.cshtml.g.cs
+C:\Users\mnia\OneDrive - GFT Technologies SE\Documents\Workspace\Atividades\Desafio MVC\bluemarket\obj\Debug\net5.0\Razor\Views\Admin\EditarEstoque.cshtml.g.cs

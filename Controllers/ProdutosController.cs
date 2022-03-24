@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Net;
 using System.Linq;
 using bluemarket.Data;
 using bluemarket.DTO;
@@ -25,8 +27,8 @@ namespace bluemarket.Controllers
                 produto.Nome = produtoTemporario.Nome;
                 produto.Categoria = database.Categorias.First(categoria => categoria.Id == produtoTemporario.Categoria);
                 produto.Fornecedor = database.Fornecedores.First(fornecedor => fornecedor.Id == produtoTemporario.Fornecedor);
-                produto.PrecoDeCusto = produtoTemporario.PrecoDeCusto;
-                produto.PrecoDeVenda = produtoTemporario.PrecoDeVenda;
+                produto.PrecoDeCusto = float.Parse(produtoTemporario.PrecoDeCustoString, CultureInfo.InvariantCulture.NumberFormat);
+                produto.PrecoDeVenda = float.Parse(produtoTemporario.PrecoDeVendaString, CultureInfo.InvariantCulture.NumberFormat);
                 produto.Medicao = produtoTemporario.Medicao;
                 produto.Status = true;
                 database.Produtos.Add(produto);
@@ -50,8 +52,8 @@ namespace bluemarket.Controllers
                 produto.Nome = produtoTemporario.Nome;
                 produto.Categoria = database.Categorias.First(categoria => categoria.Id == produtoTemporario.Categoria);
                 produto.Fornecedor = database.Fornecedores.First(fornecedor => fornecedor.Id == produtoTemporario.Fornecedor);
-                produto.PrecoDeCusto = produtoTemporario.PrecoDeCusto;
-                produto.PrecoDeVenda = produtoTemporario.PrecoDeVenda;
+                produto.PrecoDeCusto = float.Parse(produtoTemporario.PrecoDeCustoString, CultureInfo.InvariantCulture.NumberFormat);
+                produto.PrecoDeVenda = float.Parse(produtoTemporario.PrecoDeVendaString, CultureInfo.InvariantCulture.NumberFormat);
                 produto.Medicao = produtoTemporario.Medicao;
                 database.SaveChanges();
                 return RedirectToAction("Produtos", "Admin");
@@ -71,6 +73,26 @@ namespace bluemarket.Controllers
                 database.SaveChanges();
             }
             return RedirectToAction("Produtos", "Admin");
+        }
+        [HttpPost]
+        public IActionResult Produto(int id)
+        {
+            if (id > 0)
+            {
+                var produto = database.Produtos.Where(p => p.Status == true).Include(p => p.Categoria).Include(p => p.Fornecedor).First(p => p.Id == id);
+                if (produto != null)
+                {
+                    Response.StatusCode = 200;
+                    return Json(produto);
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return Json(null);
+                }
+            }
+            Response.StatusCode = 404;
+            return Json(null);
         }
     }
 }

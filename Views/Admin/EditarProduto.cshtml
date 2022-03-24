@@ -7,7 +7,7 @@
 <form class="form-horizontal" asp-action="Atualizar" asp-controller="Produtos" method="POST">
     <input type="hidden" asp-for="Id">
     <label asp-for="Nome">Nome</label>
-    <input class="form-control" type="text" asp-for="Nome" placeholder="Nome"><br>
+    <input class="form-control" type="text" asp-for="Nome" placeholder="Nome">
     <span asp-validation-for="Nome"></span><br>
 
     <label asp-for="Categoria">Categoria</label>
@@ -20,20 +20,20 @@
         asp-items='@(new SelectList(@ViewBag.Fornecedores,"Id", "Nome"))'></select>
     <span asp-validation-for="Fornecedor"></span><br>
 
-    <label asp-for="PrecoDeCusto">Preço de custo</label>
-    <input class="form-control" type="number" asp-for="PrecoDeCusto" step="any" placeholder="0,00"><br>
-    <span asp-validation-for="PrecoDeCusto"></span><br>
+    <label asp-for="PrecoDeCustoString">Preço de custo</label>
+    <input class="form-control" type="text" asp-for="PrecoDeCustoString" placeholder="0.00"><br>
+    <span asp-validation-for="PrecoDeCustoString"></span><br>
 
-    <label asp-for="PrecoDeVenda">Preço de Venda</label>
-    <input class="form-control" type="number" asp-for="PrecoDeVenda" step="any" placeholder="0,00"><br>
-    <span asp-validation-for="PrecoDeVenda"></span><br>
+    <label asp-for="PrecoDeVendaString">Preço de Venda</label>
+    <input class="form-control" type="text" asp-for="PrecoDeVendaString" placeholder="0.00"><br>
+    <span asp-validation-for="PrecoDeVendaString"></span><br>
 
     <label asp-for="Medicao">Medição</label>
     <select class="form-control" asp-for="Medicao"><br>
         <option value="0">Kilo</option>
         <option value="1">Litro</option>
         <option value="2">Unidade</option>
-    </select><br>
+    </select>
     <span asp-validation-for="PrecoDeCusto"></span><br>
 
     <button class="btn btn-success">Atualizar</button>
