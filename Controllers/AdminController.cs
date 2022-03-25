@@ -135,8 +135,12 @@ namespace bluemarket.Controllers
         {
             var estoque = database.Estoques.Include(p => p.Produto).First(e => e.Id == id);
             ViewBag.Produtos = database.Produtos.ToList();
-
             return View(estoque);
+        }
+
+        public IActionResult Vendas()
+        {
+            return View();
         }
     }
 }

@@ -7,6 +7,7 @@ using bluemarket.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 
 namespace bluemarket.Controllers
 {
@@ -131,23 +132,24 @@ namespace bluemarket.Controllers
             venda.Data = DateTime.Now;
             database.Vendas.Add(venda);
             database.SaveChanges();
-            return Ok(new { msg = "Venda processada com sucesso." });
+
+            // List<Saida> saidas = new List<Saida>();
+            // foreach (var saida in dados.Produtos)
+            // {
+            //     Saida s = new Saida();
+            //     s.Quantidade = saida.Quantidade;
+            //     s.ValorDaVenda = saida.Subtotal;
+            //     s.Venda = venda;
+            //     s.Produto = database.Produtos.First(p => p.Id == saida.Produto);
+            //     s.Data = DateTime.Now;
+            //     saidas.Add(s);
+            // }
+            // //SALVA NO BANCO
+            // database.AddRange(saidas);
+            // database.SaveChanges();
+            return Ok(new { msg = "Venda processada com sucesso!!" });
         }
 
-        public class SaidaDTO
-        {
-            public int Produto;
-            public int Quantidade;
-            public float Subtotal;
-        }
-
-        public class VendaDTO
-        {
-            public float Total;
-            public float Troco;
-
-            public SaidaDTO[] Produtos;
-        }
     }
 
 

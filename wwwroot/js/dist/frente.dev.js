@@ -93,7 +93,7 @@ $("#finalizarVendaBTN").click(function () {
   _valorPago = $("#valorPago").val();
 
   if (!isNaN(__totalVenda__)) {
-    _valorPago = parseFloat(_valorPago);
+    _valorPago = parseFloat(_valorPago).toFixed(2); //>>>>
 
     if (_valorPago >= __totalVenda__) {
       //Not a number
@@ -125,9 +125,11 @@ $("#finalizarVendaBTN").click(function () {
           console.log("dados enviados com sucesso");
           console.log(data);
         }
-      }); //Ajax pode mandar solicitações para qualquer método http
+      });
+      return; //Ajax pode mandar solicitações para qualquer método http
     } else {
       alert("Valor pago inferior ao valor da compra.");
+      return;
     }
   } else {
     alert("Valor pago inválido, digite somente valore numéricos.");

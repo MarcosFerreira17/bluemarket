@@ -104,7 +104,7 @@ $("#finalizarVendaBTN").click(function(){
 
     _valorPago = $("#valorPago").val();
     if(!isNaN(__totalVenda__)){
-        _valorPago = parseFloat(_valorPago);
+        _valorPago = parseFloat(_valorPago).toFixed(2); //>>>>
         if(_valorPago >= __totalVenda__){ //Not a number
             var _troco = _valorPago - __totalVenda__;
             $("#posvenda").show();
@@ -119,7 +119,7 @@ $("#finalizarVendaBTN").click(function(){
             //Ao invés de retornar todos os dados aninhados, irá retornar apenas o id do produto.
 
             //Preparar um novo objeto.
-            _venda = {Total: __totalVenda__ , Troco: _troco , Produtos: compra };
+            _venda = {Total: __totalVenda__ , Troco: _troco , Produtos:  compra };
 
             //Enviar dados para o backend
             $.ajax({
@@ -132,9 +132,12 @@ $("#finalizarVendaBTN").click(function(){
                     console.log("dados enviados com sucesso");
                     console.log(data);
                 }
-            }) //Ajax pode mandar solicitações para qualquer método http
+            });
+            return;
+             //Ajax pode mandar solicitações para qualquer método http
         } else {
             alert("Valor pago inferior ao valor da compra.");
+            return;
         }
     } else {
         alert("Valor pago inválido, digite somente valore numéricos.");
