@@ -1,9 +1,13 @@
 "use strict";
 
 var enderecoProduto = "https://localhost:5001/Produtos/Produto/";
+var enderecoGerarVenda = "https://localhost:5001/Produtos/GerarVenda/";
 var produto;
 var compra = [];
-var __totalVenda__ = 0; // Inicio
+var __totalVenda__ = 0;
+
+var _venda; // Inicio
+
 
 $("#posvenda").hide();
 
@@ -29,14 +33,14 @@ function zerarFormulario() {
 function adicionarNaTabela(p, q) {
   var produtoTemp = {};
   Object.assign(produtoTemp, produto);
-  var venda = {
+  _venda = {
     produto: produtoTemp,
     quantidade: q,
     subtotal: produtoTemp.precoDeVenda * q
   };
-  __totalVenda__ += venda.subtotal;
+  __totalVenda__ += _venda.subtotal;
   atualizarTotal();
-  compra.push(venda);
+  compra.push(_venda);
   $("#compras").append("\n    <tr>\n        <td>".concat(p.id, "</td>\n        <td>").concat(p.nome, "</td>\n        <td>").concat(q, "</td>\n        <td>").concat(p.precoDeVenda, "</td>\n        <td>").concat(p.medicao, "</td>\n        <td>").concat(p.precoDeVenda * q, "</td>\n        <td><button class=\"btn btn-danger\">Remover</button></td></td>\n    </tr>"));
 }
 
@@ -93,15 +97,35 @@ $("#finalizarVendaBTN").click(function () {
 
     if (_valorPago >= __totalVenda__) {
       //Not a number
-      var troco = _valorPago - __totalVenda__;
+      var _troco = _valorPago - __totalVenda__;
+
       $("#posvenda").show();
       $("#prevenda").hide();
       $("#valorPago").prop("disabled", true);
-      $("#troco").val(troco);
+      $("#troco").val(_troco); //Minimiza o aninhamento de dados dentro do meu array, para otimizar o envio de dados ao backend
+
       compra.forEach(function (elemento) {
         elemento.produto = elemento.produto.id;
-      });
-      return;
+      }); //Ao invés de retornar todos os dados aninhados, irá retornar apenas o id do produto.
+      //Preparar um novo objeto.
+
+      _venda = {
+        Total: __totalVenda__,
+        Troco: _troco,
+        Produtos: compra
+      }; //Enviar dados para o backend
+
+      $.ajax({
+        type: "POST",
+        url: enderecoGerarVenda,
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(_venda),
+        success: function success(data) {
+          console.log("dados enviados com sucesso");
+          console.log(data);
+        }
+      }); //Ajax pode mandar solicitações para qualquer método http
     } else {
       alert("Valor pago inferior ao valor da compra.");
     }

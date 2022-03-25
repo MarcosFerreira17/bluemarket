@@ -121,16 +121,32 @@ namespace bluemarket.Controllers
             return Json(null);
         }
         [HttpPost]
-        public IActionResult GerarVenda([FromBody] saidaDTO[] dados)
+        public IActionResult GerarVenda([FromBody] VendaDTO dados)
         {
-            return Ok();
+            //Gerando venda
+            Venda venda = new Venda();
+            venda.Total = dados.Total;
+            venda.Troco = dados.Troco;
+            venda.ValorPago = dados.Troco <= 0.01f ? dados.Total : dados.Total + dados.Troco;
+            venda.Data = DateTime.Now;
+            database.Vendas.Add(venda);
+            database.SaveChanges();
+            return Ok(new { msg = "Venda processada com sucesso." });
         }
 
-        public class saidaDTO
+        public class SaidaDTO
         {
-            public int produto;
-            public int quantidade;
-            public float subtotal;
+            public int Produto;
+            public int Quantidade;
+            public float Subtotal;
+        }
+
+        public class VendaDTO
+        {
+            public float Total;
+            public float Troco;
+
+            public SaidaDTO[] Produtos;
         }
     }
 
