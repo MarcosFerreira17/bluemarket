@@ -3,9 +3,13 @@
 var enderecoProduto = "https://localhost:5001/Produtos/Produto/";
 var produto;
 var compra = [];
-var __totalVenda__ = 0.0; // Inicio
+var __totalVenda__ = 0; // Inicio
 
-$("#valorTotal").html(__totalVenda__);
+$("#posvenda").hide();
+
+function atualizarTotal() {
+  $("#totalVenda").html(__totalVenda__);
+}
 
 function preencherFormulario(dadosProduto) {
   $("#campoNome").val(dadosProduto.nome);
@@ -25,7 +29,14 @@ function zerarFormulario() {
 function adicionarNaTabela(p, q) {
   var produtoTemp = {};
   Object.assign(produtoTemp, produto);
-  compra.push(produtoTemp);
+  var venda = {
+    produto: produtoTemp,
+    quantidade: q,
+    subtotal: produtoTemp.precoDeVenda * q
+  };
+  __totalVenda__ += venda.subtotal;
+  atualizarTotal();
+  compra.push(venda);
   $("#compras").append("\n    <tr>\n        <td>".concat(p.id, "</td>\n        <td>").concat(p.nome, "</td>\n        <td>").concat(q, "</td>\n        <td>").concat(p.precoDeVenda, "</td>\n        <td>").concat(p.medicao, "</td>\n        <td>").concat(p.precoDeVenda * q, "</td>\n        <td><button class=\"btn btn-danger\">Remover</button></td></td>\n    </tr>"));
 }
 
@@ -67,4 +78,47 @@ $("#pesquisar").click(function () {
   }).fail(function () {
     alert("Produto Inválido.");
   });
+}); //Finalização de venda
+
+$("#finalizarVendaBTN").click(function () {
+  if (__totalVenda__ <= 0) {
+    alert("Compra inválida, nenhum produto adicionado.");
+    return;
+  }
+
+  _valorPago = $("#valorPago").val();
+
+  if (!isNaN(__totalVenda__)) {
+    _valorPago = parseFloat(_valorPago);
+
+    if (_valorPago >= __totalVenda__) {
+      //Not a number
+      var troco = _valorPago - __totalVenda__;
+      $("#posvenda").show();
+      $("#prevenda").hide();
+      $("#valorPago").prop("disabled", true);
+      $("#troco").val(troco);
+      compra.forEach(function (elemento) {
+        elemento.produto = elemento.produto.id;
+      });
+      return;
+    } else {
+      alert("Valor pago inferior ao valor da compra.");
+    }
+  } else {
+    alert("Valor pago inválido, digite somente valore numéricos.");
+    return;
+  }
+});
+
+function restaurarModal() {
+  $("#posvenda").hide();
+  $("#prevenda").show();
+  $("#valorPago").prop("disabled", false);
+  $("#troco").val("");
+  $("#valorPago").val("");
+}
+
+$("#fecharModal").click(function () {
+  restaurarModal();
 });

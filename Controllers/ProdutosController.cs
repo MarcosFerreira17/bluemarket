@@ -6,6 +6,7 @@ using bluemarket.DTO;
 using bluemarket.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace bluemarket.Controllers
 {
@@ -80,8 +81,33 @@ namespace bluemarket.Controllers
             if (id > 0)
             {
                 var produto = database.Produtos.Where(p => p.Status == true).Include(p => p.Categoria).Include(p => p.Fornecedor).First(p => p.Id == id);
+
                 if (produto != null)
                 {
+                    var estoque = database.Estoques.First(e => e.Produto.Id == produto.Id);
+                    if (estoque == null)
+                    {
+                        produto = null;
+                    }
+                }
+
+                if (produto != null)
+                {
+                    Promocao promocao;
+                    try
+                    {
+                        promocao = database.Promocoes.First(p => p.Produto.Id == id && p.Status == true);
+                    }
+                    catch (Exception)
+                    {
+                        promocao = null;
+                    }
+
+                    if (promocao != null)
+                    {
+                        produto.PrecoDeVenda -= (produto.PrecoDeVenda * (promocao.Porcentagem / 100));
+                    }
+
                     Response.StatusCode = 200;
                     return Json(produto);
                 }
@@ -94,5 +120,19 @@ namespace bluemarket.Controllers
             Response.StatusCode = 404;
             return Json(null);
         }
+        [HttpPost]
+        public IActionResult GerarVenda([FromBody] saidaDTO[] dados)
+        {
+            return Ok();
+        }
+
+        public class saidaDTO
+        {
+            public int produto;
+            public int quantidade;
+            public float subtotal;
+        }
     }
+
+
 }
