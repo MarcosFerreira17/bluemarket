@@ -1,24 +1,24 @@
-using System.Globalization;
-using System.Net;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using bluemarket.Data;
 using bluemarket.DTO;
 using bluemarket.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace bluemarket.Controllers
 {
     public class ProdutosController : Controller
     {
-
         private readonly ApplicationDbContext database;
+
         public ProdutosController(ApplicationDbContext database)
         {
             this.database = database;
         }
+
 
         [HttpPost]
         public IActionResult Salvar(ProdutoDTO produtoTemporario)
@@ -27,24 +27,24 @@ namespace bluemarket.Controllers
             {
                 Produto produto = new Produto();
                 produto.Nome = produtoTemporario.Nome;
-                produto.Categoria = database.Categorias.First(categoria => categoria.Id == produtoTemporario.Categoria);
-                produto.Fornecedor = database.Fornecedores.First(fornecedor => fornecedor.Id == produtoTemporario.Fornecedor);
+                produto.Categoria = database.Categorias.First(categoria => categoria.Id == produtoTemporario.CategoriaID);
+                produto.Fornecedor = database.Fornecedores.First(fornecedor => fornecedor.Id == produtoTemporario.FornecedorID);
                 produto.PrecoDeCusto = float.Parse(produtoTemporario.PrecoDeCustoString, CultureInfo.InvariantCulture.NumberFormat);
                 produto.PrecoDeVenda = float.Parse(produtoTemporario.PrecoDeVendaString, CultureInfo.InvariantCulture.NumberFormat);
                 produto.Medicao = produtoTemporario.Medicao;
                 produto.Status = true;
                 database.Produtos.Add(produto);
                 database.SaveChanges();
-                return RedirectToAction("Produtos", "Admin");
+                return RedirectToAction("Produtos", "Gestao");
             }
             else
             {
                 ViewBag.Categorias = database.Categorias.ToList();
                 ViewBag.Fornecedores = database.Fornecedores.ToList();
-                return View("../Admin/NovoProduto");
+                return View("../Gestao/NovoProduto");
             }
-
         }
+
         [HttpPost]
         public IActionResult Atualizar(ProdutoDTO produtoTemporario)
         {
@@ -52,20 +52,20 @@ namespace bluemarket.Controllers
             {
                 var produto = database.Produtos.First(prod => prod.Id == produtoTemporario.Id);
                 produto.Nome = produtoTemporario.Nome;
-                produto.Categoria = database.Categorias.First(categoria => categoria.Id == produtoTemporario.Categoria);
-                produto.Fornecedor = database.Fornecedores.First(fornecedor => fornecedor.Id == produtoTemporario.Fornecedor);
+                produto.Categoria = database.Categorias.First(categoria => categoria.Id == produtoTemporario.CategoriaID);
+                produto.Fornecedor = database.Fornecedores.First(fornecedor => fornecedor.Id == produtoTemporario.FornecedorID);
                 produto.PrecoDeCusto = float.Parse(produtoTemporario.PrecoDeCustoString, CultureInfo.InvariantCulture.NumberFormat);
                 produto.PrecoDeVenda = float.Parse(produtoTemporario.PrecoDeVendaString, CultureInfo.InvariantCulture.NumberFormat);
                 produto.Medicao = produtoTemporario.Medicao;
                 database.SaveChanges();
-                return RedirectToAction("Produtos", "Admin");
+                return RedirectToAction("Produtos", "Gestao");
             }
             else
             {
-                return View("../Admin/EditarProduto");
+                return RedirectToAction("Produtos", "Gestao");
             }
         }
-        [HttpPost]
+
         public IActionResult Deletar(int id)
         {
             if (id > 0)
@@ -74,8 +74,9 @@ namespace bluemarket.Controllers
                 produto.Status = false;
                 database.SaveChanges();
             }
-            return RedirectToAction("Produtos", "Admin");
+            return RedirectToAction("Produtos", "Gestao");
         }
+
         [HttpPost]
         public IActionResult Produto(int id)
         {
@@ -97,7 +98,7 @@ namespace bluemarket.Controllers
                     Promocao promocao;
                     try
                     {
-                        promocao = database.Promocoes.First(p => p.Produto.Id == id && p.Status == true);
+                        promocao = database.Promocoes.First(p => p.Produto.Id == produto.Id && p.Status == true);
                     }
                     catch (Exception)
                     {
@@ -106,7 +107,7 @@ namespace bluemarket.Controllers
 
                     if (promocao != null)
                     {
-                        produto.PrecoDeVenda -= (produto.PrecoDeVenda * (promocao.Porcentagem / 100));
+                        produto.PrecoDeVenda -= (produto.PrecoDeVenda * promocao.Porcentagem / 100);
                     }
 
                     Response.StatusCode = 200;
@@ -118,39 +119,39 @@ namespace bluemarket.Controllers
                     return Json(null);
                 }
             }
-            Response.StatusCode = 404;
-            return Json(null);
+            else
+            {
+                Response.StatusCode = 404;
+                return Json(null);
+            }
         }
+
         [HttpPost]
         public IActionResult GerarVenda([FromBody] VendaDTO dados)
         {
-            //Gerando venda
             Venda venda = new Venda();
-            venda.Total = dados.Total;
-            venda.Troco = dados.Troco;
-            venda.ValorPago = dados.Troco <= 0.01f ? dados.Total : dados.Total + dados.Troco;
+            venda.Total = dados.total;
+            venda.Troco = dados.troco;
+            venda.ValorPago = dados.troco <= 0.01f ? dados.total : dados.total + dados.troco;
             venda.Data = DateTime.Now;
             database.Vendas.Add(venda);
             database.SaveChanges();
 
-            // List<Saida> saidas = new List<Saida>();
-            // foreach (var saida in dados.Produtos)
-            // {
-            //     Saida s = new Saida();
-            //     s.Quantidade = saida.Quantidade;
-            //     s.ValorDaVenda = saida.Subtotal;
-            //     s.Venda = venda;
-            //     s.Produto = database.Produtos.First(p => p.Id == saida.Produto);
-            //     s.Data = DateTime.Now;
-            //     saidas.Add(s);
-            // }
-            // //SALVA NO BANCO
-            // database.AddRange(saidas);
-            // database.SaveChanges();
-            return Ok(new { msg = "Venda processada com sucesso!!" });
+            return Ok(venda);
         }
 
+        public class SaidaDTO
+        {
+            public int produto;
+            public int quantidade;
+            public float subtotal;
+        }
+
+        public class VendaDTO
+        {
+            public float total;
+            public float troco;
+            public SaidaDTO[] produtos;
+        }
     }
-
-
 }

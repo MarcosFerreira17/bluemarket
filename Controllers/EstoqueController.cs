@@ -1,9 +1,11 @@
-using System.Linq;
-using System.Net.Mime;
-using bluemarket.Data;
-using bluemarket.DTO;
-using bluemarket.Models;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using bluemarket.Data;
+using bluemarket.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace bluemarket.Controllers
 {
@@ -17,37 +19,11 @@ namespace bluemarket.Controllers
         }
 
         [HttpPost]
-        public IActionResult Salvar(Estoque estoqueTemporario)
+        public IActionResult Salvar(Estoque estoqueTemp)
         {
-            database.Estoques.Add(estoqueTemporario);
+            database.Estoques.Add(estoqueTemp);
             database.SaveChanges();
-            return RedirectToAction("Estoques", "Admin");
+            return RedirectToAction("Estoque", "Gestao");
         }
-
-        [HttpPost]
-        public IActionResult Atualizar(Estoque estoqueTemporario)
-        {
-            database.Update(estoqueTemporario);
-            database.SaveChanges();
-            return RedirectToAction("Estoques", "Admin");
-        }
-
-        // [HttpPost]
-        // public IActionResult Deletar(int id)
-        // {
-        //     if (id > 0)
-        //     {
-        //         var estoque = database.Estoques.First(est => est.Id == id);
-        //         estoque.Status = false;
-        //         database.SaveChanges();
-        //     }
-        //     else
-        //     {
-        //         return RedirectToAction("Estoques", "Admin");
-        //     }
-
-        // }
-
-
     }
 }

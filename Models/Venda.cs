@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+
 namespace bluemarket.Models
 {
     public class Venda
@@ -8,6 +9,5 @@ namespace bluemarket.Models
         public float Total { get; set; }
         public float ValorPago { get; set; }
         public float Troco { get; set; }
-
     }
 }

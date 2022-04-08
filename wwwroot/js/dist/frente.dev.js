@@ -1,21 +1,22 @@
 "use strict";
 
-var enderecoProduto = "https://localhost:5001/Produtos/Produto/";
-var enderecoGerarVenda = "https://localhost:5001/Produtos/GerarVenda/";
+/* Declaração de variáveis */
+var enderecoProduto = "https://localhost:5000/Produtos/Produto/";
+var enderecoGerarVenda = "https://localhost:5000/Produtos/gerarvenda";
 var produto;
 var compra = [];
-var __totalVenda__ = 0;
-
-var _venda; // Inicio
-
+var __totalVenda__ = 0.0;
+/* Início */
 
 $("#posvenda").hide();
+atualizarTotal();
+/* Funções */
 
 function atualizarTotal() {
   $("#totalVenda").html(__totalVenda__);
 }
 
-function preencherFormulario(dadosProduto) {
+function preencherFomulario(dadosProduto) {
   $("#campoNome").val(dadosProduto.nome);
   $("#campoCategoria").val(dadosProduto.categoria.nome);
   $("#campoFornecedor").val(dadosProduto.fornecedor.nome);
@@ -33,24 +34,28 @@ function zerarFormulario() {
 function adicionarNaTabela(p, q) {
   var produtoTemp = {};
   Object.assign(produtoTemp, produto);
-  _venda = {
+  var venda = {
     produto: produtoTemp,
     quantidade: q,
     subtotal: produtoTemp.precoDeVenda * q
   };
-  __totalVenda__ += _venda.subtotal;
+  __totalVenda__ += venda.subtotal;
   atualizarTotal();
-  compra.push(_venda);
-  $("#compras").append("\n    <tr>\n        <td>".concat(p.id, "</td>\n        <td>").concat(p.nome, "</td>\n        <td>").concat(q, "</td>\n        <td>").concat(p.precoDeVenda, "</td>\n        <td>").concat(p.medicao, "</td>\n        <td>").concat(p.precoDeVenda * q, "</td>\n        <td><button class=\"btn btn-danger\">Remover</button></td></td>\n    </tr>"));
+  compra.push(venda);
+  $("#compras").append("<tr>\n        <td>".concat(p.id, "</td>\n        <td>").concat(p.nome, "</td>\n        <td>").concat(q, "</td>\n        <td>").concat(p.precoDeVenda, " R$</td>\n        <td>").concat(p.medicao, "</td>\n        <td>").concat(p.precoDeVenda * q, " R$</td>\n        <td> <button class=\"btn btn-danger\"> Remover </button> </td>\n     <tr/>"));
 }
 
 $("#produtoForm").on("submit", function (event) {
   event.preventDefault();
   var produtoParaTabela = produto;
   var qtd = $("#campoQuantidade").val();
-  adicionarNaTabela(produtoParaTabela, qtd);
+  console.log(produtoParaTabela);
+  console.log(qtd);
+  adicionarNaTabela(produtoParaTabela, qtd); //var produto = undefined;
+
   zerarFormulario();
-}); //Ajax
+});
+/* Ajax */
 
 $("#pesquisar").click(function () {
   var codProduto = $("#codProduto").val();
@@ -78,62 +83,59 @@ $("#pesquisar").click(function () {
     }
 
     produto.medicao = med;
-    preencherFormulario(produto);
+    preencherFomulario(produto);
   }).fail(function () {
-    alert("Produto Inválido.");
+    alert("Produto inválido!");
   });
-}); //Finalização de venda
+});
+/* Finalização de venda */
 
 $("#finalizarVendaBTN").click(function () {
   if (__totalVenda__ <= 0) {
-    alert("Compra inválida, nenhum produto adicionado.");
+    alert("Compra inválida. Nenhum produto adicionado!");
     return;
   }
 
-  _valorPago = $("#valorPago").val();
+  var _valorPago = $("#valorPago").val();
 
-  if (!isNaN(__totalVenda__)) {
-    _valorPago = parseFloat(_valorPago).toFixed(2); //>>>>
+  if (!isNaN(_valorPago)) {
+    _valorPago = parseFloat(_valorPago);
 
     if (_valorPago >= __totalVenda__) {
-      //Not a number
-      var _troco = _valorPago - __totalVenda__;
-
       $("#posvenda").show();
       $("#prevenda").hide();
       $("#valorPago").prop("disabled", true);
-      $("#troco").val(_troco); //Minimiza o aninhamento de dados dentro do meu array, para otimizar o envio de dados ao backend
+
+      var _troco = _valorPago - __totalVenda__;
+
+      $("#troco").val(_troco); //Processar array de compra
 
       compra.forEach(function (elemento) {
         elemento.produto = elemento.produto.id;
-      }); //Ao invés de retornar todos os dados aninhados, irá retornar apenas o id do produto.
-      //Preparar um novo objeto.
+      }); //Preparar um novo objeto
 
-      _venda = {
-        Total: __totalVenda__,
-        Troco: _troco,
-        Produtos: compra
-      }; //Enviar dados para o backend
+      var _venda = {
+        total: __totalVenda__,
+        troco: _troco,
+        produtos: compra
+      }; //Enviar pro back end
 
       $.ajax({
-        type: "POST",
+        type: "post",
         url: enderecoGerarVenda,
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(_venda),
         success: function success(data) {
-          console.log("dados enviados com sucesso");
           console.log(data);
+          console.log("Dados enviados com sucesso!");
         }
       });
-      return; //Ajax pode mandar solicitações para qualquer método http
     } else {
-      alert("Valor pago inferior ao valor da compra.");
-      return;
+      alert("Valor pago não pode ser menor que o total!");
     }
   } else {
-    alert("Valor pago inválido, digite somente valore numéricos.");
-    return;
+    alert("Valor pago inválido!");
   }
 });
 

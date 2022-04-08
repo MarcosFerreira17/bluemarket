@@ -1,4 +1,4 @@
-namespace bluemarket.Models
+﻿namespace bluemarket.Models
 {
     public class Estoque
     {
@@ -6,6 +6,5 @@ namespace bluemarket.Models
         public Produto Produto { get; set; }
         public int ProdutoId { get; set; }
         public float Quantidade { get; set; }
-
     }
 }

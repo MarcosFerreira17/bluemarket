@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\bluemarket.csproj": {}
+    "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\bluemarket.csproj": {
+    "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\bluemarket.csproj",
+        "projectUniqueName": "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj",
         "projectName": "bluemarket",
-        "projectPath": "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\bluemarket.csproj",
+        "projectPath": "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj",
         "packagesPath": "C:\\Users\\mnia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\bluemarket\\obj\\",
+        "outputPath": "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\Treinamento MVC\\bluemarket\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mnia\\AppData\\Roaming\\NuGet\\NuGet.Config"

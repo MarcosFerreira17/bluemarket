@@ -1,4 +1,4 @@
-namespace bluemarket.Models
+﻿namespace bluemarket.Models
 {
     public class Fornecedor
     {
@@ -6,10 +6,6 @@ namespace bluemarket.Models
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
-
         public bool Status { get; set; }
-
-
-
     }
 }

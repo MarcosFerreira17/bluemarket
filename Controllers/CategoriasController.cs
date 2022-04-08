@@ -1,15 +1,16 @@
-using System.Net;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using bluemarket.Data;
 using bluemarket.DTO;
 using bluemarket.Models;
-using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace bluemarket.Controllers
 {
     public class CategoriasController : Controller
     {
+
         private readonly ApplicationDbContext database;
+
         public CategoriasController(ApplicationDbContext database)
         {
             this.database = database;
@@ -23,14 +24,13 @@ namespace bluemarket.Controllers
                 Categoria categoria = new Categoria();
                 categoria.Nome = categoriaTemporaria.Nome;
                 categoria.Status = true;
-
                 database.Categorias.Add(categoria);
                 database.SaveChanges();
-                return RedirectToAction("Categorias", "Admin");
+                return RedirectToAction("Categorias", "Gestao");
             }
             else
             {
-                return View("../Admin/NovaCategoria");
+                return View("../Gestao/NovaCategoria");
             }
         }
 
@@ -42,13 +42,14 @@ namespace bluemarket.Controllers
                 var categoria = database.Categorias.First(cat => cat.Id == categoriaTemporaria.Id);
                 categoria.Nome = categoriaTemporaria.Nome;
                 database.SaveChanges();
-                return RedirectToAction("Categorias", "Admin");
+                return RedirectToAction("Categorias", "Gestao");
             }
             else
             {
-                return View("../Admin/EditarCategoria");
+                return View("../Gestao/EditarCategoria");
             }
         }
+
         [HttpPost]
         public IActionResult Deletar(int id)
         {
@@ -58,7 +59,7 @@ namespace bluemarket.Controllers
                 categoria.Status = false;
                 database.SaveChanges();
             }
-            return RedirectToAction("Categorias", "Admin");
+            return RedirectToAction("Categorias", "Gestao");
         }
 
     }

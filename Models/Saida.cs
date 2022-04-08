@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace bluemarket.Models
 {
@@ -10,6 +10,5 @@ namespace bluemarket.Models
         public float ValorDaVenda { get; set; }
         public DateTime Data { get; set; }
         public Venda Venda { get; set; }
-
     }
 }
