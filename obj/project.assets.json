@@ -6215,11 +6215,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj",
+      "projectUniqueName": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Projeto Starter\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj",
       "projectName": "bluemarket",
-      "projectPath": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj",
+      "projectPath": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Projeto Starter\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj",
       "packagesPath": "C:\\Users\\mnia\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Atividades\\Desafio MVC\\Treinamento MVC\\bluemarket\\obj\\",
+      "outputPath": "c:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Projeto Starter\\Desafio MVC\\Treinamento MVC\\bluemarket\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mnia\\AppData\\Roaming\\NuGet\\NuGet.Config"

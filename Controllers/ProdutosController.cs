@@ -98,7 +98,7 @@ namespace bluemarket.Controllers
                     Promocao promocao;
                     try
                     {
-                        promocao = database.Promocoes.First(p => p.Produto.Id == produto.Id && p.Status == true);
+                        promocao = database.Promocoes.First(p => p.Produto.Id == id && p.Status == true);
                     }
                     catch (Exception)
                     {
@@ -107,7 +107,7 @@ namespace bluemarket.Controllers
 
                     if (promocao != null)
                     {
-                        produto.PrecoDeVenda -= (produto.PrecoDeVenda * promocao.Porcentagem / 100);
+                        produto.PrecoDeVenda -= (produto.PrecoDeVenda * (promocao.Porcentagem / 100));
                     }
 
                     Response.StatusCode = 200;
@@ -119,16 +119,15 @@ namespace bluemarket.Controllers
                     return Json(null);
                 }
             }
-            else
-            {
-                Response.StatusCode = 404;
-                return Json(null);
-            }
+            Response.StatusCode = 404;
+            return Json(null);
         }
+
 
         [HttpPost]
         public IActionResult GerarVenda([FromBody] VendaDTO dados)
         {
+            //Gerando venda
             Venda venda = new Venda();
             venda.Total = dados.total;
             venda.Troco = dados.troco;
@@ -137,21 +136,36 @@ namespace bluemarket.Controllers
             database.Vendas.Add(venda);
             database.SaveChanges();
 
-            return Ok(venda);
+            List<Saida> saidas = new List<Saida>();
+            foreach (var saida in dados.produtos)
+            {
+                Saida s = new Saida();
+                s.Quantidade = saida.quantidade;
+                s.ValorDaVenda = saida.subtotal;
+                s.Venda = venda;
+                s.Produto = database.Produtos.First(p => p.Id == saida.produto);
+                s.Data = DateTime.Now;
+                saidas.Add(s);
+            }
+            //SALVA NO BANCO
+            database.AddRange(saidas);
+            database.SaveChanges();
+            return Ok(new { msg = "Venda processada com sucesso!!" });
+
         }
 
         public class SaidaDTO
         {
-            public int produto;
-            public int quantidade;
-            public float subtotal;
+            public int produto { get; set; }
+            public int quantidade { get; set; }
+            public float subtotal { get; set; }
         }
 
         public class VendaDTO
         {
-            public float total;
-            public float troco;
-            public SaidaDTO[] produtos;
+            public float total { get; set; }
+            public float troco { get; set; }
+            public SaidaDTO[] produtos { get; set; }
         }
     }
 }
