@@ -1,21 +1,19 @@
-Projeto MVC Identity SONMARKET
+# Projeto MVC Identity BLUEMARKET
 
-Sistema de gestão de supermercados completo com frente de caixa. Utilizando a suite de tecnologias de desenvolvimento web do .NET Core, tais como ASP.NET Core para desenvolvimento da aplicação, Entity Framework Core para manipulação de banco de dados e Identity Framework Core para autenticação e controle de acesso de usuários(ACL).
+<p align="justify">Sistema de gestão de supermercados completo com frente de caixa. Utilizando a suite de tecnologias de desenvolvimento web do .NET Core, tais como ASP.NET Core para desenvolvimento da aplicação, Entity Framework Core para manipulação de banco de dados e Identity Framework Core para autenticação e controle de acesso de usuários. </p>
 
-Tecnologias utilizadas:
+### Tecnologias utilizadas:
 
-ASP.NET Core
+- [X] ASP.NET Core
 
-Bootstrap
+- [X] Bootstrap
 
-Entity Framework
+- [X] Entity Framework
 
-Identity Core
+- [X] Identity Core
 
-Jquery
+- [X] Jquery
 
-DataTables
+- [X] DataTables
 
-Chart.js
-
-Azure
+- [X] Chart.js
