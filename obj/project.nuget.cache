@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kqSJUQUx93YFvdne65MTIneXEo23y2LGcE0H6rsonUcIPTURbmNsqvQPU2hmoWB3hhD7qk5ZA8zmLsQ9/kH0FQ==",
+  "dgSpecHash": "rtK5PJ3eRvhGziXYMOQtFSVszxIzxrrQky1RERMslsZ6sCYSlak2xdeURs51FzZSWs93FTkntMN+gxXOAxR6BA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mnia\\OneDrive - GFT Technologies SE\\Documents\\Workspace\\Projeto Starter\\Desafio MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj",
+  "projectFilePath": "C:\\dev\\Projeto_Starter\\Desafio_MVC\\Treinamento MVC\\bluemarket\\bluemarket.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mnia\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mnia\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.15\\microsoft.aspnetcore.cryptography.internal.5.0.15.nupkg.sha512",

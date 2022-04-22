@@ -7,9 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bluemarket.Controllers
 {
+    [Authorize]
     public class ProdutosController : Controller
     {
         private readonly ApplicationDbContext database;
@@ -151,7 +153,6 @@ namespace bluemarket.Controllers
             database.AddRange(saidas);
             database.SaveChanges();
             return Ok(new { msg = "Venda processada com sucesso!!" });
-
         }
 
         public class SaidaDTO

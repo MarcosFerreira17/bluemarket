@@ -120,10 +120,9 @@ $("#finalizarVendaBTN").click(function () {
         url: enderecoGerarVenda,
         dataType: "json",
         contentType: "application/json",
-        data: JSON.stringify(_venda),
+        data: JSON.stringify(compra),
         success: function success(data) {
           console.log("dados enviados com sucesso");
-          console.log(data);
         }
       });
       return; //Ajax pode mandar solicitações para qualquer método http

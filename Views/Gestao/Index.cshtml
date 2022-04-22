@@ -2,6 +2,8 @@
 
   Layout = "_LayoutAdmin";
 }
+
+
 <!-- Icon Cards-->
 <div class="row">
   <div class="col-xl-3 col-sm-6 mb-3">
@@ -74,9 +76,9 @@
 <hr />
 
 <canvas class="line-chart"></canvas>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script>
-  var enderecoRelatorioDeVendas = "https://localhost:5000/Gestao/RelatorioDeVendas";
+  var enderecoRelatorioDeVendas = "https://localhost:5001/Gestao/RelatorioDeVendas";
   var labels = [];//data das vendas
   var data = [];//dados
   $.post(enderecoRelatorioDeVendas, function (dados, status) {
@@ -96,8 +98,8 @@
           label: "Total de vendas em R$",
           data: data,
           borderWidth: 12,
-          borderColor: "#113300",
-          backgroundColor: "transparent"
+          borderColor: "#003399",
+          backgroundColor: "#023399"
         }]
       }
     });

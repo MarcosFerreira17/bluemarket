@@ -9,8 +9,8 @@ using bluemarket.Data;
 namespace bluemarket.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220324185651_ModificandoVenda")]
-    partial class ModificandoVenda
+    [Migration("20220422135022_InitialCreation")]
+    partial class InitialCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

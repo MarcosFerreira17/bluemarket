@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace bluemarket.Controllers
 {
+    [Authorize]
     public class GestaoController : Controller
     {
         private readonly ApplicationDbContext database;
@@ -145,5 +146,6 @@ namespace bluemarket.Controllers
         {
             return Ok(database.Vendas.ToList());
         }
+
     }
 }

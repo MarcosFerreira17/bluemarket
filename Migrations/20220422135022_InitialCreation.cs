@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace bluemarket.Migrations
 {
-    public partial class CreateBlueMarketSchema : Migration
+    public partial class InitialCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,7 +72,8 @@ namespace bluemarket.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,7 +92,8 @@ namespace bluemarket.Migrations
                     Email = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Telefone = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -282,7 +284,7 @@ namespace bluemarket.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ProdutoId = table.Column<int>(type: "int", nullable: true),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
                     Quantidade = table.Column<float>(type: "float", nullable: false)
                 },
                 constraints: table =>
@@ -293,7 +295,7 @@ namespace bluemarket.Migrations
                         column: x => x.ProdutoId,
                         principalTable: "Produtos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -328,6 +330,7 @@ namespace bluemarket.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ProdutoId = table.Column<int>(type: "int", nullable: true),
+                    Quantidade = table.Column<float>(type: "float", nullable: false),
                     ValorDaVenda = table.Column<float>(type: "float", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     VendaId = table.Column<int>(type: "int", nullable: true)
@@ -416,6 +419,41 @@ namespace bluemarket.Migrations
                 name: "IX_Saidas_VendaId",
                 table: "Saidas",
                 column: "VendaId");
+
+
+            migrationBuilder.Sql("INSERT INTO Categorias(Id, Nome, Status) VALUES('1','Frutas', '1')");
+            migrationBuilder.Sql("INSERT INTO Categorias(Id, Nome, Status) VALUES('2','Refrigerantes', '1')");
+            migrationBuilder.Sql("INSERT INTO Categorias(Id, Nome, Status) VALUES('3','Sucos', '1')");
+            migrationBuilder.Sql("INSERT INTO Categorias(Id, Nome, Status) VALUES('4','Limpeza', '1')");
+            migrationBuilder.Sql("INSERT INTO Categorias(Id, Nome, Status) VALUES('5','Carne', '1')");
+            migrationBuilder.Sql("INSERT INTO Categorias(Id, Nome, Status) VALUES('6','Vegetais', '1')");
+            migrationBuilder.Sql("INSERT INTO Categorias(Id, Nome, Status) VALUES('7','Doces', '1')");
+
+            migrationBuilder.Sql("INSERT INTO Fornecedores(Id, Nome, Email, Telefone, Status) VALUES('1','GFT', 'teste@teste.com', '123456789', '1')");
+            migrationBuilder.Sql("INSERT INTO Fornecedores(Id, Nome, Email, Telefone, Status) VALUES('2','Milclean', 'teste@teste.com', '123456789', '1')");
+            migrationBuilder.Sql("INSERT INTO Fornecedores(Id, Nome, Email, Telefone, Status) VALUES('3','Zecadoquito', 'teste@teste.com', '123456789','1')");
+            migrationBuilder.Sql("INSERT INTO Fornecedores(Id, Nome, Email, Telefone, Status) VALUES('4','Aleatório1', 'teste@teste.com', '123456789','1')");
+            migrationBuilder.Sql("INSERT INTO Fornecedores(Id, Nome, Email, Telefone, Status) VALUES('5','Aleatorio2', 'teste@teste.com','123456789', '1')");
+            migrationBuilder.Sql("INSERT INTO Fornecedores(Id, Nome, Email, Telefone, Status) VALUES('6','Aleatorio3', 'teste@teste.com','123456789', '1')");
+            migrationBuilder.Sql("INSERT INTO Fornecedores(Id, Nome, Email, Telefone, Status) VALUES('7','Aleatorio4', 'teste@teste.com','123456789' ,'1')");
+
+            migrationBuilder.Sql("INSERT INTO Produtos(Id, Nome, CategoriaId, FornecedorId, PrecoDeCusto, PrecoDeVenda, Medicao, Status) VALUES('1', 'teste', '1', '1', 100.00, 200.00, '1', '1')");
+            migrationBuilder.Sql("INSERT INTO Produtos(Id, Nome, CategoriaId, FornecedorId, PrecoDeCusto, PrecoDeVenda, Medicao, Status) VALUES('2', 'teste', '2', '1', 100.00, 200.00, '1', '1')");
+            migrationBuilder.Sql("INSERT INTO Produtos(Id, Nome, CategoriaId, FornecedorId, PrecoDeCusto, PrecoDeVenda, Medicao, Status) VALUES('3', 'teste', '3', '1', 100.00, 200.00, '1', '1')");
+            migrationBuilder.Sql("INSERT INTO Produtos(Id, Nome, CategoriaId, FornecedorId, PrecoDeCusto, PrecoDeVenda, Medicao, Status) VALUES('4', 'teste', '4', '1', 100.00, 200.00, '1', '1')");
+            migrationBuilder.Sql("INSERT INTO Produtos(Id, Nome, CategoriaId, FornecedorId, PrecoDeCusto, PrecoDeVenda, Medicao, Status) VALUES('5', 'teste', '5', '1', 100.00, 200.00, '1', '1')");
+            migrationBuilder.Sql("INSERT INTO Produtos(Id, Nome, CategoriaId, FornecedorId, PrecoDeCusto, PrecoDeVenda, Medicao, Status) VALUES('6', 'teste', '6', '1', 100.00, 200.00, '1', '1')");
+            migrationBuilder.Sql("INSERT INTO Produtos(Id, Nome, CategoriaId, FornecedorId, PrecoDeCusto, PrecoDeVenda, Medicao, Status) VALUES('7', 'teste', '7', '1', 100.00, 200.00, '1', '1')");
+
+            migrationBuilder.Sql("INSERT INTO Estoques(Id, ProdutoId, Quantidade) VALUES('1','1', '100')");
+            migrationBuilder.Sql("INSERT INTO Estoques(Id, ProdutoId, Quantidade) VALUES('2','2', '100')");
+            migrationBuilder.Sql("INSERT INTO Estoques(Id, ProdutoId, Quantidade) VALUES('3','3', '100')");
+            migrationBuilder.Sql("INSERT INTO Estoques(Id, ProdutoId, Quantidade) VALUES('4','4', '100')");
+            migrationBuilder.Sql("INSERT INTO Estoques(Id, ProdutoId, Quantidade) VALUES('5','5', '100')");
+            migrationBuilder.Sql("INSERT INTO Estoques(Id, ProdutoId, Quantidade) VALUES('6','6', '100')");
+            migrationBuilder.Sql("INSERT INTO Estoques(Id, ProdutoId, Quantidade) VALUES('7','7', '100')");
+
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -127,10 +127,9 @@ $("#finalizarVendaBTN").click(function(){
                 url: enderecoGerarVenda,
                 dataType: "json",
                 contentType: "application/json",
-                data: JSON.stringify(_venda),
+                data: JSON.stringify(compra),
                 success: function(data){
                     console.log("dados enviados com sucesso");
-                    console.log(data);
                 }
             });
             return;
